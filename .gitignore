@@ -1,0 +1,12 @@
+# Abaikan file hasil compile (binary)
+*.class
+
+# Abaikan folder package hasil build (jika nanti pakai)
+out/
+bin/
+
+# Abaikan file konfigurasi IDE (VS Code / IntelliJ)
+.vscode/
+.idea/
+*.iml
+.DS_Store

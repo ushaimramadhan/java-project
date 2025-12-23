@@ -26,13 +26,12 @@ public class StringAnalyzer {
 
     public static int hitungVokal(String teks) {
         int count = 0;
-        teks = teks.toLowerCase();
+        String lowerTeks = teks.toLowerCase();
 
-        for (int i=0; i<teks.length(); i++) {
-            char c = teks.charAt(i);
+        for (char c : lowerTeks.toCharArray()) {
             if (c == 'a' || c == 'i' || c == 'u' || c == 'e' || c == 'o') {
                 count++;
-            } 
+            }
         }
         return count;
     }
@@ -49,11 +48,11 @@ public class StringAnalyzer {
     }
 
     public static String balikKalimat(String teks) {
-        String hasil = "";
+        StringBuilder sb = new StringBuilder();
 
-        for (int i = teks.length() - 1; i>=0; i--) {
-            hasil += teks.charAt(i);
+        for (int i = teks.length() - 1; i >= 0; i--) {
+            sb.append(teks.charAt(i));
         }
-        return hasil;
+        return sb.toString();
     }
 }

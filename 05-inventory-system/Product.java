@@ -32,3 +32,9 @@ public class Product {
         return "Id: " + this.id + "Name: " + this.name + "Price: " + this.price + "Stock: " + this.stock;
     }
 }
+
+public class InsufficientStockException extends Exception {
+    public InsufficientStockException(String message) {
+        super(message);
+    }
+}

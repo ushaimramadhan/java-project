@@ -49,22 +49,30 @@ public class InventoryManager {
         storage.put(p.getId(), p);
     }
 
-    public void reduceStock(String id, int quantity) throws InsufficientStockException{
-        Product barang = storage.get(id);
-        int stockSaatIni = barang.getStock();
-        int sisaStock = stockSaatIni - quantity;
-
+    public void reduceStock(String id, int quantity) throws InsufficientStockException {
         if (!storage.containsKey(id)) {
             System.out.println("Barang tidak ditemukan!");
             return;
-        } else if (stockSaatIni < quantity) {
-            throw new InsufficientStockException("stok " + barang.getName() + " kurang!");
-        } else {
-            sisaStock.setStock();
-
-            System.out.println("Behasil mengurangi stok " + barang.getName());
         }
 
+        Product barang = storage.get(id);
+        int stockSaatIni = barang.getStock();
+        
+        if (stockSaatIni < quantity) {
+            throw new InsufficientStockException("stok " + barang.getName() + " kurang!");
+        
+        } else {
+            int sisaStock = stockSaatIni - quantity;
+            barang.setStock(sisaStock);
+            System.out.println("Behasil mengurangi stok " + barang.getName());
+        }
+    }
 
+    public void printAllProducts() {
+        System.out.println("\nLIST BARANG DI GUDANG");
+
+        for (Product p : storage.values()) {
+            System.out.println(p);
+        }
     }
 }

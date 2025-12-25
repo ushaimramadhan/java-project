@@ -1,3 +1,6 @@
+import java.util.HashMap;
+import java.util.Map;
+
 public class Product {
     private String id;
     private String name;
@@ -36,5 +39,32 @@ public class Product {
 public class InsufficientStockException extends Exception {
     public InsufficientStockException(String message) {
         super(message);
+    }
+}
+
+public class InventoryManager {
+    private Map<String, Product> storage = new HashMap<>();
+
+    public void addProduct(Product p) {
+        storage.put(p.getId(), p);
+    }
+
+    public void reduceStock(String id, int quantity) throws InsufficientStockException{
+        Product barang = storage.get(id);
+        int stockSaatIni = barang.getStock();
+        int sisaStock = stockSaatIni - quantity;
+
+        if (!storage.containsKey(id)) {
+            System.out.println("Barang tidak ditemukan!");
+            return;
+        } else if (stockSaatIni < quantity) {
+            throw new InsufficientStockException("stok " + barang.getName() + " kurang!");
+        } else {
+            sisaStock.setStock();
+
+            System.out.println("Behasil mengurangi stok " + barang.getName());
+        }
+
+
     }
 }

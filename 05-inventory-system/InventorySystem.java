@@ -1,7 +1,7 @@
 import java.util.HashMap;
 import java.util.Map;
 
-public class Product {
+class Product {
     private String id;
     private String name;
     private double price;
@@ -36,13 +36,13 @@ public class Product {
     }
 }
 
-public class InsufficientStockException extends Exception {
+class InsufficientStockException extends Exception {
     public InsufficientStockException(String message) {
         super(message);
     }
 }
 
-public class InventoryManager {
+class InventoryManager {
     private Map<String, Product> storage = new HashMap<>();
 
     public void addProduct(Product p) {
@@ -69,10 +69,32 @@ public class InventoryManager {
     }
 
     public void printAllProducts() {
-        System.out.println("\nLIST BARANG DI GUDANG");
+        System.out.println("LIST BARANG DI GUDANG");
 
         for (Product p : storage.values()) {
             System.out.println(p);
         }
+    }
+}
+
+public class InventorySystem {
+    public static void main(String[] args) {
+        InventoryManager manager = new InventoryManager();
+
+        manager.addProduct(new Product("A1", "Laptop Gaming", 15000000, 5));
+        manager.addProduct(new Product("B1", "Mouse Wireless", 150000, 10));
+
+        try {
+            System.out.println("Transaksi 1: Beli Mouse 2 buah");
+            manager.reduceStock("B1", 2);
+
+            System.out.println("\nTransaksi 2: Beli Laptop Gaming");
+            manager.reduceStock("A1", 10);
+        } catch (InsufficientStockException e){
+            System.out.println("TRANSAKSI GAGAL: " + e.getMessage());
+        }
+
+        System.out.println("\n=== Stok Akhir ===");
+        manager.printAllProducts();
     }
 }

@@ -71,13 +71,40 @@ class Intern extends Employee {
         return hoursWorked * hourlyRate;
     }
 }
- 
+
+class ContractEmployee extends Employee implements Taxable {
+    private int daysWorked;
+    private double dailyRate;
+
+    public ContractEmployee(String id, String name, int daysWorked, double dailyRate) {
+        super(id, name);
+        this.daysWorked = daysWorked;
+        this.dailyRate = dailyRate;
+    }
+
+    @Override
+    public double calculateSalary() {
+        return daysWorked * dailyRate;
+    }
+
+    @Override
+    public double getTaxRate() {
+        return 0.05;
+    }
+
+    @Override
+    public double calculateTax(double grossSalary) {
+        return grossSalary * getTaxRate();
+    }
+}
+
 public class SistemPayrollKaryawan {
     public static void main(String[] args) {
         List<Employee> employeeList = new ArrayList<>();
 
         employeeList.add(new FullTimeEmployee("FT-01",  "budi", 10_000_000, 2_000_000));
         employeeList.add(new Intern("INT-01", "adan", 40, 50_000));
+        employeeList.add(new ContractEmployee("Con-01", "asep", 7, 100_000));
 
         System.out.println("GENERATING PAYROLL...\n");
 

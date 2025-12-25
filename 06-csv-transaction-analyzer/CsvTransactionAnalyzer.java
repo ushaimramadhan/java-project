@@ -3,37 +3,28 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 record Transaction(String id, String date, int amount, String category) {}
 
 public class CsvTransactionAnalyzer {
     public static void main(String[] args) {
         String fileName = "transaction.csv";
-        List<Transaction> transactions = new ArrayList<>();
 
         try {
-            List<String> lines = Files.readAllLines(Paths.get(fileName));
+            List<Transaction> transactions = Files.lines(Paths.get(fileName))
+                .skip(1)
+                .map(line -> {
+                    String[] parts = line.split(",");
+                    return new Transaction(parts[0], parts[1], Integer.parseInt(parts[2]), parts[3]);
+                })
+                .collect(Collectors.toList());
 
-            lines.remove(0);
-
-            for (String line : lines) {
-                String[] parts = line.split(",");
-
-                String id = parts[0];
-                String date = parts[1];
-                int amount = Integer.parseInt(parts[2]);
-                String category = parts[3];
-
-                transactions.add(new Transaction(id, date, amount, category));
-            }
-
-            System.out.println("Berhasil membaca " + transactions.size() + " transaksi.\n");
-
-            for (Transaction t : transactions) {
-                System.out.println(t);
-            } 
-        } catch (IOException e) {
-            System.out.println("Error baca file: " + e.getMessage());
+            transactions.forEach(System.out::println);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }    
 }

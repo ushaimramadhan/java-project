@@ -6,9 +6,13 @@ Setiap folder di sini merepresentasikan satu *mini-project* atau tantangan kodin
 
 ## Daftar Project
 
-| No  | Project | Deskripsi Singkat | Status |
-| :-: | :--- | :--- | :--- |
-| 1 | **[Kalkulator](https://github.com/ushaimramadhan/java-project/tree/main/01-kalkulator)** | Membuat Kalkulator Sederhana | Selesai |
+| No  | Project | Deskripsi Singkat | Kategori | 
+| :-: | :--- | :--- | :--- | 
+| 1 | **[Kalkulator](https://github.com/ushaimramadhan/java-project/tree/main/01-kalkulator)** | Membuat Kalkulator Sederhana | Java Klasik |
+| 2 | **[Tebak Angka](https://github.com/ushaimramadhan/java-project/tree/main/02-tebak-angka)** | Membuat Game Tebak Angka | Java Klasik | 
+| 3 | **[Analisis String](https://github.com/ushaimramadhan/java-project/tree/main/03-string-analyzer)** | Membuat Analisis String | Java Klasik | 
+| 4 | **[sistem payroll karyawan](https://github.com/ushaimramadhan/java-project/tree/main/04-sistem-payroll-karyawan)** | Membuat Sistem Sederhana untuk memprediksi gaji karyawan | Java Klasik | 
+| 5 | **[Sistem Persediaan](https://github.com/ushaimramadhan/java-project/tree/main/05-inventory-system)** | Membuat Sistem penyimpanan gudang sederhana | Java Klasik | 
 
 ## Teknologi & Tools
 * **Bahasa:** Java 

@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.List;
+
 interface Taxable {
     double getTaxRate();
     double calculateTax(double grossSalary);
@@ -66,5 +69,38 @@ class Intern extends Employee {
     @Override
     public double calculateSalary() {
         return hoursWorked * hourlyRate;
+    }
+}
+ 
+public class SistemPayrollKaryawan {
+    public static void main(String[] args) {
+        List<Employee> employeeList = new ArrayList<>();
+
+        employeeList.add(new FullTimeEmployee("FT-01",  "budi", 10_000_000, 2_000_000));
+        employeeList.add(new Intern("INT-01", "adan", 40, 50_000));
+
+        System.out.println("GENERATING PAYROLL...\n");
+
+        for (Employee emp : employeeList) {
+            emp.printSlipHeader();
+
+            double grossSalary = emp.calculateSalary();
+            double tax = 0;
+
+            if (emp instanceof Taxable) {
+                Taxable taxableEmp = (Taxable) emp; //casting
+                tax = taxableEmp.calculateTax(grossSalary);
+                System.out.println("Tipe: karyawan kena pajak");
+            } else {
+                System.out.println("Tipe: Bebas pajak");
+            }
+
+            double netSalary = grossSalary - tax;
+
+            System.out.println("Gaji Kotor: Rp " + (long) grossSalary);
+            System.out.println("Potongan: Rp " + (long) tax);
+            System.out.println("Gaji Bersih: Rp " + (long) netSalary);
+            System.out.println();
+        }
     }
 }
